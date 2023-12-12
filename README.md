@@ -2,8 +2,7 @@ Pronostici Serie A con Machine Learning
 
 Questo progetto offre un'applicazione interattiva basata su Streamlit che utilizza modelli di Machine Learning per predire gli esiti delle partite di calcio della Serie A italiana. Sfoglia le previsioni delle prossime partite, la classifica prevista e le analisi delle performance del modello.
 
-[
-](https://pronostici-serie-a-drelegantia.streamlit.app/)
+L'applicazione è raggiungibile qui https://pronostici-serie-a-drelegantia.streamlit.app/
 Funzionalità Principali:
 
 Interfaccia interattiva basata su Streamlit per l'accesso alle previsioni della Serie A.
