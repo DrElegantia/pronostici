@@ -133,10 +133,13 @@ plt.title('Matrice di Confusione')
 st.pyplot(fig)
 st.markdown(
     """
-   **Interpretazione della Matrice di Confusione:**
+    **Interpretazione della Matrice di Confusione:**
 
     Ogni cella della matrice rappresenta una combinazione specifica di previsioni e risultati reali. 
-    Ecco un esempio di lettura:
+    Gli elementi sulla diagonale principale rappresentano le previsioni corrette. 
+    Gli elementi al di fuori della diagonale principale rappresentano gli errori di previsione.
+    
+    Ad esempio:
 
     **Vittoria squadra casa (Predizione) - Vittoria squadra casa (Reale):** Questa cella mostra la percentuale di partite dove il modello ha correttamente previsto che la squadra di casa avrebbe vinto, e questa è effettivamente la situazione in cui la squadra di casa ha vinto.
     """
