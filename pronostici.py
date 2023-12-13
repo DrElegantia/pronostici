@@ -271,7 +271,7 @@ st.table(a)
 
 
 
-prossime_partite=forecast[['HomeTeam','AwayTeam','Prediction']].iloc[:9,:]
+prossime_partite=forecast[['HomeTeam','AwayTeam','Prediction']].iloc[:10,:]
 prossime_partite['Prediction'] = prossime_partite['Prediction'].replace('A', 'Vittoria squadra fuoricasa')
 prossime_partite['Prediction'] = prossime_partite['Prediction'].replace('D', 'Pareggio')
 prossime_partite['Prediction'] = prossime_partite['Prediction'].replace('H', 'Vittoria squadra casa')
