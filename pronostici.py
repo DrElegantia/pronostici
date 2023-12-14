@@ -59,6 +59,18 @@ for df in dfs:
     df['x_FTAG'] = df.groupby('AwayTeam')['FTAG'].cumsum() - df['FTAG']
     df['x_FTHGS'] = df.groupby('HomeTeam')['FTAG'].cumsum() - df['FTAG']
     df['x_FTAGS'] = df.groupby('AwayTeam')['FTHG'].cumsum() - df['FTHG']
+    df['x_FTHG_R'] = df.groupby('HomeTeam')['FTHG'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['FTHG']
+    df['x_FTAG_R'] = df.groupby('AwayTeam')['FTAG'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)- df['FTAG']
+    df['x_FTHGS_R'] = df.groupby('HomeTeam')['FTAG'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['FTAG']
+    df['x_FTAGS_R'] = df.groupby('AwayTeam')['FTHG'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['FTHG']
+    df['x_HS'] = df.groupby('HomeTeam')['HS'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['HS']
+    df['x_AS'] = df.groupby('AwayTeam')['AS'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)- df['AS']
+    df['x_HST'] = df.groupby('HomeTeam')['HST'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['HST']
+    df['x_AST'] = df.groupby('AwayTeam')['AST'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)- df['AST']
+    df['x_HC'] = df.groupby('HomeTeam')['HC'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['HC']
+    df['x_AC'] = df.groupby('AwayTeam')['AC'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)- df['AC']
+    df['x_HF'] = df.groupby('HomeTeam')['HF'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['HF']
+    df['x_AF'] = df.groupby('AwayTeam')['AF'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)- df['AF']
     df['conta']=1
     df['PGH'] = df.groupby('HomeTeam')['conta'].cumsum() - df['conta']
     df['PGA'] = df.groupby('AwayTeam')['conta'].cumsum() - df['conta']
@@ -78,10 +90,10 @@ for df in dfs:
     df['Sconfitte_f'] = df.groupby('AwayTeam')['H_away'].rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True) - df['H_away']
     mappatura_valori_h = {'A': 0, 'D': 1, 'H': 3}
     df['PH'] = df['FTR'].map(mappatura_valori_h)
-    df['PH']=df.groupby('HomeTeam')['PH'].rolling(window=5, min_periods=1).sum().reset_index(level=0, drop=True) - df['PH']
+    df['PH']=df.groupby('HomeTeam')['PH'].rolling(window=6, min_periods=1).sum().reset_index(level=0, drop=True) - df['PH']
     mappatura_valori_a = {'A': 3, 'D': 1, 'H': 0}
     df['PA'] = df['FTR'].map(mappatura_valori_a)
-    df['PA'] = df.groupby('AwayTeam')['PA'].rolling(window=5, min_periods=1).sum().reset_index(level=0, drop=True) - df['PA']
+    df['PA'] = df.groupby('AwayTeam')['PA'].rolling(window=6, min_periods=1).sum().reset_index(level=0, drop=True) - df['PA']
 
 
 
@@ -194,7 +206,7 @@ df_forecast.Data= pd.to_datetime(df_forecast.Data)
 df_forecast.sort_values(by='Data', inplace=True)
 
 # Lista delle colonne da aggiornare con gli ultimi valori
-colonnes = ['x_FTHG', 'x_FTAG', 'x_FTHGS', 'x_FTAGS', 'conta', 'PGH', 'PGA', 'Sconfitte_c', 'Pareggi_c', 'Vittorie_c',
+colonnes = ['x_FTHG', 'x_FTAG', 'x_FTHGS', 'x_FTAGS', 'x_FTHG_R', 'x_FTAG_R', 'x_FTHGS_R', 'x_FTAGS_R', 'x_HS','x_AS', 'x_HST', 'x_HC', 'x_AC', 'x_AST', 'x_HF', 'x_AF', 'conta', 'PGH', 'PGA', 'Sconfitte_c', 'Pareggi_c', 'Vittorie_c',
             'Pareggi_f', 'Vittorie_f', 'Sconfitte_f', 'PH', 'PA']
 
 for col in colonnes:
