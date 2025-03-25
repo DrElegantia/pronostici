@@ -634,7 +634,7 @@ final_stats = final_stats[['Posizione', 'Team', 'Mediana', 'Media', 'Deviazione'
 st.write("### Classifica Finale Monte Carlo")
 st.dataframe(final_stats)
 
-# Creazione di una tabella per ogni giornata con risultato effettivo e previsto
+# Creazione di una tabella per ogni giornata con Risultato precedente e previsto
 
 # Estrai le colonne di interesse
 giornate = df_forecast[['Data', 'HomeTeam', 'AwayTeam']].copy()
@@ -646,26 +646,26 @@ giornate['Risultato previsto'] = forecast['Prediction'].replace({
     'H': 'Vittoria casa'
 })
 
-# Risultato effettivo
-giornate['Risultato effettivo'] = 'N/A'  # Sostituirai questi valori con i risultati effettivi quando disponibili
+# Risultato precedente
+giornate['Risultato precedente'] = 'N/A'  # Sostituirai questi valori con i risultati effettivi quando disponibili
 
-# Popola la colonna 'Risultato effettivo' con i risultati reali storici
+# Popola la colonna 'Risultato precedente' con i risultati reali storici
 for i, row in giornate.iterrows():
     home_team = row['HomeTeam']
     away_team = row['AwayTeam']
 
-    # Verifica il risultato effettivo usando df24 (o il dataset che contiene i risultati storici)
+    # Verifica il Risultato precedente usando df24 (o il dataset che contiene i risultati storici)
     match_result = df24[((df24['HomeTeam'] == home_team) & (df24['AwayTeam'] == away_team)) |
                         ((df24['HomeTeam'] == away_team) & (df24['AwayTeam'] == home_team))]
 
     if not match_result.empty:
         ftr = match_result['FTR'].iloc[0]  # Ottieni il risultato finale (FTR: H, D, A)
         if ftr == 'H':
-            giornate.at[i, 'Risultato effettivo'] = 'Vittoria casa'
+            giornate.at[i, 'Risultato precedente'] = 'Vittoria casa'
         elif ftr == 'A':
-            giornate.at[i, 'Risultato effettivo'] = 'Vittoria fuori casa'
+            giornate.at[i, 'Risultato precedente'] = 'Vittoria fuori casa'
         else:
-            giornate.at[i, 'Risultato effettivo'] = 'Pareggio'
+            giornate.at[i, 'Risultato precedente'] = 'Pareggio'
 
 # Visualizzazione della tabella
 st.write("### Risultato per Giornata e Pronostico")
